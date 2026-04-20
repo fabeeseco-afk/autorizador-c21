@@ -101,7 +101,18 @@ if st.button("GENERAR DOCUMENTO"):
             'correo_correos': 'correo', 'electrónico_electrónicos': 'electrónico',
             'mencionado_mencionados': 'mencionado'
         }
+hoy = datetime.now()
 
+#  Traductor de meses
+    meses_es = {
+        "January": "Enero", "February": "Febrero", "March": "Marzo", 
+        "April": "Abril", "May": "Mayo", "June": "Junio",
+        "July": "Julio", "August": "Agosto", "September": "Septiembre",
+        "October": "Octubre", "November": "Noviembre", "December": "Diciembre"
+    }
+    nombre_mes_ingles = hoy.strftime("%B")  # Esto saca "April"
+    mes_castellano = meses_es.get(nombre_mes_ingles, nombre_mes_ingles) # Esto lo convierte a "Abril"
+    
     # 3. Preparar el contexto (Lo que se inyecta al Word)
     hoy = datetime.now()
     contexto = {
@@ -113,7 +124,7 @@ if st.button("GENERAR DOCUMENTO"):
         'precio_letras': numero_a_letras(precio_val),
         'porcentaje_numero': comision,
         'porcentaje_letras': numero_a_letras(comision),
-        'dia_firma': hoy.day, 'mes_firma': hoy.strftime("%B"), 'ano_firma': hoy.year,
+        'dia_firma': hoy.day, 'mes_firma': mes_castellano, 'ano_firma': hoy.year,
         'propietarios_extras': otros_propietarios
     }
 
