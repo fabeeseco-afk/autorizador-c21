@@ -57,19 +57,49 @@ if st.button("GENERAR DOCUMENTO"):
     respuesta = requests.get(URL_DRIVE)
     doc = DocxTemplate(BytesIO(respuesta.content))
 
-    # 2. Lógica de Plurales/Singulares (Mapeo automático)
+    # 2. Lógica de Plurales/Singulares (Mapeo automático de tus 38 variables)
     if es_plural:
         plural_dict = {
             'EL_LOS': 'LOS', 'AUTORIZANTE_AUTORIZANTES': 'AUTORIZANTES',
-            'autoriza_autorizan': 'autorizan', 'su_sus': 'sus',
-            'UNICO_UNICOS': 'UNICOS', 'TITULAR_TITULARES': 'TITULARES'
-            # (Aquí agregarías el resto de las 38 variables que listaste)
+            'DENOMINADO_DENOMINADA_DENOMINADOS': 'DENOMINADOS',
+            'AL_A_LOS': 'A LOS', 'DEL_DE_LOS': 'DE LOS',
+            'UNICO_UNICOS': 'UNICOS', 'EXCLUSIVO_EXCLUSIVOS': 'EXCLUSIVOS',
+            'TITULAR_TITULARES': 'TITULARES', 'MANDANTE_MANDANTES': 'MANDANTES',
+            'autoriza_autorizan': 'autorizan', 'declara_declaran': 'declaran',
+            'encuentra_encuentran': 'encuentran', 'inhibido_inhibidos': 'inhibidos',
+            'informado_informados': 'informados', 'faculta_facultan': 'facultan',
+            'sea_sean': 'sean', 'abonará_abonarán': 'abonarán',
+            'vendiera_vendieran': 'vendieran', 'deberá_deberán': 'deberán',
+            'presentara_presentaran': 'presentaran', 'retractare_retractaren': 'retractaren',
+            'acepta_aceptan': 'aceptan', 'manifiesta_manifiestan': 'manifiestan',
+            'constituyen_constituye': 'constituyen', 'corresponderles_corresponderle': 'corresponderles',
+            'su_sus': 'sus', 'respectiva_respectivas': 'respectivas',
+            'dirección_direcciones': 'direcciones', 'postal_postales': 'postales',
+            'correo_correos': 'correos', 'electrónico_electrónicos': 'electrónicos',
+            'mencionado_mencionados': 'mencionados'
         }
     else:
+        # Lógica de género para el singular
+        s_gen = "A" if genero == "Femenino" else "O"
+        art_gen = "LA" if genero == "Femenino" else "EL"
         plural_dict = {
-            'EL_LOS': 'EL', 'AUTORIZANTE_AUTORIZANTES': 'AUTORIZANTE',
-            'autoriza_autorizan': 'autoriza', 'su_sus': 'su',
-            'UNICO_UNICOS': 'UNICO', 'TITULAR_TITULARES': 'TITULAR'
+            'EL_LOS': art_gen, 'AUTORIZANTE_AUTORIZANTES': 'AUTORIZANTE',
+            'DENOMINADO_DENOMINADA_DENOMINADOS': f'DENOMINAD{s_gen}',
+            'AL_A_LOS': 'AL', 'DEL_DE_LOS': 'DEL',
+            'UNICO_UNICOS': 'UNICO', 'EXCLUSIVO_EXCLUSIVOS': 'EXCLUSIVO',
+            'TITULAR_TITULARES': 'TITULAR', 'MANDANTE_MANDANTES': 'MANDANTE',
+            'autoriza_autorizan': 'autoriza', 'declara_declaran': 'declaran',
+            'encuentra_encuentran': 'encuentra', 'inhibido_inhibidos': 'inhibido',
+            'informado_informados': 'informado', 'faculta_facultan': 'faculta',
+            'sea_sean': 'sea', 'abonará_abonarán': 'abonará',
+            'vendiera_vendieran': 'vendiera', 'deberá_deberán': 'deberá',
+            'presentara_presentaran': 'presentara', 'retractare_retractaren': 'retractare',
+            'acepta_aceptan': 'acepta', 'manifiesta_manifiestan': 'manifiesta',
+            'constituyen_constituye': 'constituye', 'corresponderles_corresponderle': 'corresponderle',
+            'su_sus': 'su', 'respectiva_respectivas': 'respectiva',
+            'dirección_direcciones': 'dirección', 'postal_postales': 'postal',
+            'correo_correos': 'correo', 'electrónico_electrónicos': 'electrónico',
+            'mencionado_mencionados': 'mencionado'
         }
 
     # 3. Preparar el contexto (Lo que se inyecta al Word)
