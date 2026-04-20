@@ -101,9 +101,9 @@ if st.button("GENERAR DOCUMENTO"):
             'correo_correos': 'correo', 'electrónico_electrónicos': 'electrónico',
             'mencionado_mencionados': 'mencionado'
         }
-hoy = datetime.now()
+    hoy = datetime.now()
 
-#  Traductor de meses
+    #  Traductor de meses
     meses_es = {
         "January": "Enero", "February": "Febrero", "March": "Marzo", 
         "April": "Abril", "May": "Mayo", "June": "Junio",
